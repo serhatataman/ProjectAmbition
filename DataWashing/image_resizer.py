@@ -21,14 +21,16 @@ training_data = []
 # Pillow's resize method.
 print("Resizing training images in directory '" + IMAGE_DIR + "'...")
 
+# We are using Pillow to resize all images to our desired size and appending them on a list as numpy array
+
 for filename in os.listdir(images_path):
     path = os.path.join(images_path, filename)
     image = Image.open(path).resize((IMAGE_SIZE, IMAGE_SIZE), Image.ANTIALIAS)
 
     training_data.append(np.asarray(image))
 
-training_data = np.reshape(
-    training_data, (-1, IMAGE_SIZE, IMAGE_SIZE, IMAGE_CHANNELS))
+# We are using numpy to reshape the array in a suitable format and normalizing data
+training_data = np.reshape(training_data, (-1, IMAGE_SIZE, IMAGE_SIZE, IMAGE_CHANNELS))
 training_data = training_data / 127.5 - 1
 
 # Creating the resized images directory
@@ -40,5 +42,6 @@ else:
     print("Removing the old resized images...")
     os.mkdir(RESIZED_IMAGES_DIR)
 
+# We are saving our image array in npy binary file so that we don’t have to go through all the images every time
 print('Saving training images to a file...')
 np.save(resized_images_file_path, training_data)
