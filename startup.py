@@ -1,12 +1,13 @@
 from keras.layers import Input
 from keras.models import Model
-from keras.optimizers import Adam
+import keras.optimizer_v2.adam
 import os
 import numpy as np
 from PIL import Image
 import Discriminator.discriminator as discriminator_builder
 import Generator.generator as generator_builder
 import Configurations.configuration as config
+import DataWashing.image_resizer as data
 
 
 # save_images function takes to count and noise as an input
@@ -39,18 +40,17 @@ def save_images(cnt, noise):
     im.save(filename)
 
 
-training_data = []
+training_data = data.get_resized_images()
+
 
 # We have defined our input shape: which is 128X128X3 (image_size, image_size, image_channel)
 image_shape = (config.IMAGE_SIZE, config.IMAGE_SIZE, config.IMAGE_CHANNELS)
-
-optimizer = Adam()
 
 # We are calling our build_discriminator function
 # and passing the image shape then compiling it with a loss function and an optimizer.
 discriminator = discriminator_builder.build_discriminator(image_shape)
 # Since it is a classification model, we are using accuracy as its performance metric.
-discriminator.compile(loss="binary_crossentropy", optimizer=optimizer, metrics=["accuracy"])
+discriminator.compile(loss="binary_crossentropy", optimizer='adam', metrics=["accuracy"])
 # We are calling our build_generator function and passing our random_input noise vector as its input
 generator = generator_builder.build_generator(config.NOISE_SIZE, config.IMAGE_CHANNELS)
 
@@ -70,7 +70,7 @@ validity = discriminator(generated_image)
 
 # We are then compiling the generative model with loss function and optimizer.
 combined = Model(random_input, validity)
-combined.compile(loss="binary_crossentropy", optimizer=optimizer, metrics=["accuracy"])
+combined.compile(loss="binary_crossentropy", optimizer='adam', metrics=["accuracy"])
 
 # We are defining two vectors as y_real and y_fake. These vectors are composed of random 0’s and 1’s values
 y_real = np.ones((config.BATCH_SIZE, 1))

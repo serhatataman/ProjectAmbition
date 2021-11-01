@@ -13,7 +13,8 @@ NOISE_SIZE = 100
 # Configurations - Note: Images should always be of square size
 
 # EPOCHS is a number of iterations: it defines how many times we want to iterate over our training images
-EPOCHS = 10000
+# EPOCHS = 10000 -> original value
+EPOCHS = 10
 # BATCH_SIZE is a number of images to feed in every iteration.
 BATCH_SIZE = 32
 GENERATE_RES = 3
