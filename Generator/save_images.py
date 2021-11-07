@@ -1,5 +1,4 @@
 import Configurations.configuration as config
-from datetime import datetime
 import os
 import numpy as np
 from PIL import Image

@@ -45,3 +45,6 @@ def get_resized_images():
     print('Saving training images to a file...')
     np.save(resized_images_file_path, training_data)
     return training_data
+
+# If you have stored your data somewhere else, you can use the following code to load data:
+# training_data = np.load(os.path.join(‘directory_name’, ‘filename.npy’))

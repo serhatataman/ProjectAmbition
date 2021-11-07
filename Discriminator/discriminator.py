@@ -1,7 +1,7 @@
-from keras.layers import Input, Reshape, Dropout, Dense, Flatten, BatchNormalization, Activation, ZeroPadding2D
+from keras.layers import Input, Dropout, Dense, Flatten, BatchNormalization, ZeroPadding2D
 from keras.layers.advanced_activations import LeakyReLU
-from keras.layers.convolutional import UpSampling2D, Conv2D
-from keras.models import Sequential, Model, load_model
+from keras.layers.convolutional import Conv2D
+from keras.models import Sequential, Model
 
 
 def build_discriminator(image_shape):
@@ -53,3 +53,6 @@ def build_discriminator(image_shape):
     validity = model(input_image)
 
     return Model(input_image, validity)
+
+# Discriminator in GAN uses a cross entropy loss, since discriminator's job is to classify;
+# cross entropy is the best for classification
