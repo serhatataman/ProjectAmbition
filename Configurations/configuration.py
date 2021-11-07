@@ -1,8 +1,10 @@
 # Configuration
 
 # Preview image Frame
+# PREVIEW_ROWS and PREVIEW_COLS needs to be set to 1 if we want to create a single image
 PREVIEW_ROWS = 4
 PREVIEW_COLS = 7
+# Margin should be set to zero in order to eliminate the white spaces around the image
 PREVIEW_MARGIN = 4
 SAVE_FREQ = 100
 
@@ -14,7 +16,7 @@ NOISE_SIZE = 100
 
 # EPOCHS is a number of iterations: it defines how many times we want to iterate over our training images
 # EPOCHS = 10000 -> original value
-EPOCHS = 10
+EPOCHS = 350
 # BATCH_SIZE is a number of images to feed in every iteration.
 BATCH_SIZE = 32
 GENERATE_RES = 3
