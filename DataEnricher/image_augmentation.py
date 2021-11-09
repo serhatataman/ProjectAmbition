@@ -32,9 +32,13 @@ seq = iaa.Sequential([
 # loop through the images, resizing and augmenting
 path, dirs, files = next(os.walk(from_path))
 for file in sorted(files):
-    print(file)
+    print("Processing file: " + file)
+    if not os.path.isdir(path):
+        raise FileNotFoundError("Path " + path + " not found!")
     image = Image.open(path + "/" + file)
     if image.mode == "RGB":
+        if not os.path.isdir(to_path):
+            os.mkdir(to_path)
         image.save(to_path + "/" + file)
         image_resized = image.resize((size, size), resample=Image.BILINEAR)
         image_np = np.array(image_resized)
