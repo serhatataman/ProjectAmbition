@@ -21,6 +21,6 @@ EPOCHS = 500
 BATCH_SIZE = 32
 GENERATE_RES = 3
 # IMAGE_SIZE is our image size which we resized earlier to 128X128
-IMAGE_SIZE = 128  # rows/cols
+IMAGE_SIZE = 1024  # rows/cols
 # IMAGE_CHANNELS is a number of channel in our images; which is 3
 IMAGE_CHANNELS = 3
